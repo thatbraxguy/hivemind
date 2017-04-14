@@ -1,4 +1,4 @@
-defmodule Hivemind.PageController do
+defmodule Hivemind.TopicController do
   use Hivemind.Web, :controller
 
   def index(conn, _params) do
