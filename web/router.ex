@@ -14,8 +14,16 @@ defmodule Hivemind.Router do
   end
 
   scope "/", Hivemind do
-    pipe_through :browser # Use the default browser stack
+    pipe_through :browser
 
     resources "/", TopicController
+  end
+
+  scope "/auth", Hivemind do
+    pipe_through :browser
+
+    get "/signout", AuthController, :signout
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
   end
 end
