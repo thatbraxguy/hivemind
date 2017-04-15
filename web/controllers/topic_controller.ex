@@ -2,6 +2,8 @@ defmodule Hivemind.TopicController do
   use Hivemind.Web, :controller
   alias Hivemind.Topic
 
+  plug Hivemind.Plugs.RequireAuth when action in [:new, :create, :edit, :update, :delete]
+
   def index(conn, _params) do
     render conn, "index.html", topics: Repo.all(Topic)
   end

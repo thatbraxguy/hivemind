@@ -4,6 +4,7 @@ defmodule Hivemind.Topic do
   schema "topics" do
     field :title, :string
     field :description, :string
+    has_many :comments, Hivemind.Comment
   end
 
   def changeset(struct, params \\ %{}) do

@@ -6,9 +6,11 @@ defmodule Hivemind.AuthController do
   alias Hivemind.User
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-    user_params = %{token: auth.credentials.token, email: auth.info.email, provider: "github"}
+    user_info = auth.extra.raw_info.user
+
+    user_params = %{token: auth.credentials.token, email: auth.info.email, provider: "github", name: user_info["name"], avatar: user_info["avatar_url"]}
+
     changeset = User.changeset(%User{}, user_params)
-    
     signin(conn, changeset)
   end
 
